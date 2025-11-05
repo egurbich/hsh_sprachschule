@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const navLinkStyle = {
-    color: '#33373a',
-    transition: 'color 0.3s ease'
+    color: '#e7eaed',
+    transition: 'color 0.15s ease'
 };
 
 const navLinkHoverStyle = {
-    color: '#565c61'  // Lighter version of the original color
+    color: '#d0d2d5'  // Hover color requested
 };
 
 export default function Navbar() {
@@ -62,7 +62,10 @@ export default function Navbar() {
                             onMouseEnter={(e) => e.currentTarget.style.color = navLinkHoverStyle.color}
                             onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
                         >
-                            <i className="bi bi-cart fs-3"></i>
+                            <Link 
+                                to="/cart" 
+                                className="text-decoration-none text-reset"
+                                ><i className="bi bi-cart fs-3"></i></Link>
                         </button>
                     </div>
                 </div>
