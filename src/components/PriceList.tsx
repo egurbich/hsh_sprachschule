@@ -71,7 +71,9 @@ const PriceList: React.FC = () => {
       setAddedToCart(true);
       const updatedCartItems = await getCartItems();
       console.log('Updated cart items:', updatedCartItems);
-      setCartItems(updatedCartItems);
+  setCartItems(updatedCartItems);
+  // Notify other parts of the app that the cart changed (Navbar badge, etc.)
+  window.dispatchEvent(new Event('cart:updated'));
     } catch (error) {
       console.error("Failed to add to cart:", error);
     }
@@ -116,7 +118,7 @@ const PriceList: React.FC = () => {
               </td>
               <td style={{ padding: "1rem" }}>
                 <img
-                  src={course.image.startsWith("/") ? course.image : `img/${course.image}`}
+                  src={course.image.startsWith("/") ? course.image : `/img/${course.image}`}
                   alt={course.title}
                   style={{ width: "80px", height: "60px", objectFit: "cover", borderRadius: "4px" }}
                 />

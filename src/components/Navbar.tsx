@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getCartItems } from '../utils/db';
 
 const navLinkStyle = {
     color: '#e7eaed',
@@ -11,8 +12,26 @@ const navLinkHoverStyle = {
 };
 
 export default function Navbar() {
+    const [cartCount, setCartCount] = useState<number>(0);
+
+    useEffect(() => {
+        const load = async () => {
+            try {
+                const items = await getCartItems();
+                setCartCount(items.length);
+            } catch (e) {
+                // eslint-disable-next-line no-console
+                console.error('Failed to load cart count', e);
+            }
+        };
+        load();
+        const handler = () => load();
+        window.addEventListener('cart:updated', handler);
+        return () => window.removeEventListener('cart:updated', handler);
+    }, []);
+
     return (
-        <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#6c96a4ff' }}>
+        <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#6c96a4ff' }}>
             <div className="container-fluid">
                 <button 
                     className="navbar-toggler" 
@@ -55,18 +74,25 @@ export default function Navbar() {
                             >Pricelist</Link>
                         </li>
                     </ul>
-                    <div className="d-flex">
-                        <button 
-                            className="btn"
-                            style={navLinkStyle}
-                            onMouseEnter={(e) => e.currentTarget.style.color = navLinkHoverStyle.color}
-                            onMouseLeave={(e) => e.currentTarget.style.color = navLinkStyle.color}
+                    <div className="d-flex align-items-center">
+                        <Link 
+                            to="/cart"
+                            className="text-decoration-none text-reset position-relative"
+                            style={{ ...navLinkStyle, display: 'inline-block' }}
+                            onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = navLinkHoverStyle.color}
+                            onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = navLinkStyle.color}
                         >
-                            <Link 
-                                to="/cart" 
-                                className="text-decoration-none text-reset"
-                                ><i className="bi bi-cart fs-3"></i></Link>
-                        </button>
+                            <i className="bi bi-cart fs-3"></i>
+                            {cartCount > 0 && (
+                                <span 
+                                  className="position-absolute translate-middle badge rounded-pill bg-danger"
+                                  style={{ top: 0, left: '100%', fontSize: '0.65rem' }}
+                                  aria-label={`Cart has ${cartCount} item${cartCount===1?'':'s'}`}
+                                >
+                                  {cartCount}
+                                </span>
+                            )}
+                        </Link>
                     </div>
                 </div>
             </div>

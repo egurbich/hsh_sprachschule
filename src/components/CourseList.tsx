@@ -19,7 +19,7 @@ const cardStyle: React.CSSProperties = {
 
 const imageContainerStyle: React.CSSProperties = {
   width: '100%',
-  height: '200px',
+  height: '235px',
   overflow: 'hidden',
 };
 
@@ -102,7 +102,7 @@ export default function CourseList() {
                         <Link to={`/course/${course.course_id}`} style={{ textDecoration: 'none' }}>
                             <div style={imageContainerStyle}>
                                 <img
-                                    src={course.image.startsWith("/") ? course.image : `img/${course.image}`}
+                                    src={course.image.startsWith("/") ? course.image : `/img/${course.image}`}
                                     alt={course.title}
                                     style={imageStyle}
                                 />

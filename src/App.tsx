@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CourseList from "./components/CourseList";
 import PriceList from "./components/PriceList";
-import { CartProvider } from "./context/CartContext";
 import Home from "./pages/Home";
 import Cart from "./components/Cart";
 import CourseDetail from "./pages/CourseDetail";
@@ -21,21 +20,19 @@ function App() {
   }, []);
 
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <Navbar />
-        <div className="p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<CourseList />} />
-            <Route path="/course/:courseId" element={<CourseDetail />} />
-            <Route path="/prices" element={<PriceList />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
-        <Footer />
-      </BrowserRouter>
-    </CartProvider>
+    <BrowserRouter>
+      <Navbar />
+      <div className="p-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<CourseList />} />
+          <Route path="/course/:courseId" element={<CourseDetail />} />
+          <Route path="/prices" element={<PriceList />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </div>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

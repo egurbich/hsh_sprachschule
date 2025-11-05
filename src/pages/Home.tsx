@@ -72,7 +72,7 @@ const Home: React.FC = () => {
       <section style={heroStyle}>
         {/* free-to-use photo placeholder from Unsplash */}
         <img
-          src="img/home_1.jpg"
+          src="/img/home_1.jpg"
           alt="Classroom or language learning scene"
           style={imgStyle}
         />

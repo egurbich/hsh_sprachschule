@@ -26,7 +26,7 @@ export default function Footer() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
           <a href="/about" {...attachHover({ textDecoration: 'none' })}>About Us</a>
-          <a href="/datenschutz" {...attachHover({ textDecoration: 'none' })}>Datenschuts</a>
+          <a href="/datenschutz" {...attachHover({ textDecoration: 'none' })}>Datenschutz</a>
           <a href="/impressum" {...attachHover({ textDecoration: 'none' })}>Impressum</a>
         </div>
 

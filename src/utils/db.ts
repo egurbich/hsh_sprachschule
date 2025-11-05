@@ -132,6 +132,28 @@ export async function getCartItems(): Promise<CartRecord[]> {
   return promisifyRequest<CartRecord[]>(req);
 }
 
+export async function removeCartItem(cart_id: number): Promise<void> {
+  const db = await openDB();
+  const tx = db.transaction("shopping_cart", "readwrite");
+  const store = tx.objectStore("shopping_cart");
+  store.delete(cart_id);
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function clearCart(): Promise<void> {
+  const db = await openDB();
+  const tx = db.transaction("shopping_cart", "readwrite");
+  const store = tx.objectStore("shopping_cart");
+  store.clear();
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
 export async function seedDefaultCoursesIfEmpty(): Promise<void> {
   const existing = await getAllCourses();
   if (existing && existing.length > 0) return;
