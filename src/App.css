@@ -1,0 +1,782 @@
+/* ==========================================================================
+   CSS Variables - Design System
+   ========================================================================== */
+:root {
+  /* Colors */
+  --primary-color: #6c96a4;
+  --primary-hover: #5a8292;
+  --text-primary: #33373a;
+  --text-secondary: #444;
+  --text-muted: #666;
+  --text-light: #6c757d;
+  --nav-link: #e7eaed;
+  --nav-link-hover: #d0d2d5;
+  --border-light: #e2e8f0;
+  --border-lighter: #eee;
+  --bg-light: #f8f9fa;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #dc3545;
+  --link-blue: #0d6efd;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease-in-out;
+  --transition-slow: 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   Global & Reset
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Layout Utilities
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+}
+
+.container-narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+.heading-primary {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.heading-secondary {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+.navbar-custom {
+  background-color: var(--primary-color);
+  /* Reduce overall navbar height by ~10px compared to default */
+  padding-top: calc(0.5rem - 5px);
+  padding-bottom: calc(0.5rem - 5px);
+}
+
+/* Ensure the navbar uses horizontal padding only, no extra vertical padding
+   from the shared .container utility (keeps header compact) */
+.navbar-custom .container {
+  padding-left: var(--spacing-xl);
+  padding-right: var(--spacing-xl);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav-link-custom {
+  color: var(--nav-link);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link-custom:hover {
+  color: var(--nav-link-hover);
+}
+
+.cart-icon {
+  color: var(--nav-link);
+  display: inline-block;
+  transition: color var(--transition-fast);
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.cart-icon:hover {
+  color: var(--nav-link-hover);
+}
+
+.cart-badge {
+  font-size: 0.65rem;
+}
+
+/* Mobile navbar adjustments */
+@media (max-width: 991px) {
+  .navbar-toggler {
+    order: 0;
+  }
+  
+  .cart-icon {
+    order: 1;
+  }
+  
+  .navbar-collapse {
+    order: 2;
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer-custom {
+  background-color: var(--primary-color);
+  padding: 0.75rem 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.footer-link {
+  color: var(--nav-link);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--nav-link-hover);
+}
+
+/* ==========================================================================
+   Home Page
+   ========================================================================== */
+.hero-image {
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-title {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.home-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.separator {
+  height: 1px;
+  background-color: var(--primary-color);
+  margin: 1.5rem 0;
+}
+
+.popular-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.popular-course-card {
+  border: 1px solid rgba(222, 235, 239, 1);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  min-height: 330px;
+}
+
+.popular-course-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
+
+.popular-course-image {
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.popular-course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.popular-course-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.popular-course-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.course-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.course-link:hover {
+  color: #565c61;
+}
+
+/* ==========================================================================
+   Course List Page
+   ========================================================================== */
+.course-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.course-card {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  background-color: #fff;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.course-card-image-container {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.course-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.course-card:hover .course-card-image {
+  transform: scale(1.05);
+}
+
+.course-card-content {
+  padding: 1.5rem;
+}
+
+.course-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.course-card-description {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-card-link {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Course Detail Page
+   ========================================================================== */
+.course-detail-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.course-detail-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.cta-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.cta-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Price List Page
+   ========================================================================== */
+.price-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table th,
+.price-table td {
+  padding: var(--spacing-md);
+}
+
+.price-table thead tr {
+  border-bottom: 2px solid var(--border-lighter);
+}
+
+.price-table tbody tr {
+  border-bottom: 1px solid var(--border-lighter);
+}
+
+.price-table th {
+  text-align: left;
+}
+
+.price-table th:nth-child(6),
+.price-table td:nth-child(6) {
+  text-align: right;
+}
+
+.price-table th:last-child,
+.price-table td:last-child {
+  text-align: center;
+}
+
+.course-image-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.people-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.people-input {
+  width: 40px;
+  padding: 0.25rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: var(--radius-sm);
+}
+
+.apartment-option {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-md);
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.apartment-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-large {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.total-section {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.added-to-cart-row {
+  margin-top: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.success-message {
+  color: var(--success);
+}
+
+/* ==========================================================================
+   Cart Page
+   ========================================================================== */
+.cart-empty {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+}
+
+.cart-empty p {
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table thead tr {
+  border-bottom: 2px solid var(--border-lighter);
+}
+
+.cart-table tbody tr {
+  border-bottom: 1px solid var(--border-lighter);
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 12px;
+}
+
+.cart-table th {
+  text-align: left;
+}
+
+.cart-table th:nth-child(4),
+.cart-table th:nth-child(5),
+.cart-table td:nth-child(4),
+.cart-table td:nth-child(5) {
+  text-align: right;
+}
+
+.cart-table th:last-child,
+.cart-table td:last-child {
+  text-align: center;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.grand-total {
+  font-size: 18px;
+}
+
+.grand-total-label {
+  margin-right: 8px;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-warning {
+  background-color: var(--warning);
+}
+
+.btn-counter {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.btn-counter:disabled {
+  cursor: not-allowed;
+}
+
+.btn-remove {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-remove:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn-clear {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--text-light);
+  background: var(--text-light);
+  color: white;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.btn-clear:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+.link-primary {
+  text-decoration: none;
+  color: var(--link-blue);
+  font-weight: 600;
+  transition: opacity var(--transition-fast);
+}
+
+.link-primary:hover {
+  opacity: 0.8;
+}
+
+.link-reset {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Radio Buttons
+   ========================================================================== */
+.radio-large {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.loading {
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.error {
+  color: var(--danger);
+  padding: var(--spacing-xl);
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ==========================================================================
+   Add Course Form
+   ========================================================================== */
+.course-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.required {
+  color: var(--danger);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-hint {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-xl);
+}
+
+.error-message {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background-color: #fee;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+}

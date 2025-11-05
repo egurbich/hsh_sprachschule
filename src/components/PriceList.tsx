@@ -83,23 +83,23 @@ const PriceList: React.FC = () => {
     cartItems.some(item => item.course_id === courseId);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+    <div className="price-list-container">
+      <table className="price-table">
         <thead>
-          <tr style={{ borderBottom: "2px solid #eee" }}>
-            <th style={{ padding: "1rem", textAlign: "left" }}>Select</th>
-            <th style={{ padding: "1rem", textAlign: "left" }}>Image</th>
-            <th style={{ padding: "1rem", textAlign: "left" }}>Course</th>
-            <th style={{ padding: "1rem", textAlign: "left" }}>Duration</th>
-            <th style={{ padding: "1rem", textAlign: "left" }}>People</th>
-            <th style={{ padding: "1rem", textAlign: "right" }}>Price</th>
-            <th style={{ padding: "1rem", textAlign: "center" }}>Action</th>
+          <tr>
+            <th>Select</th>
+            <th>Image</th>
+            <th>Course</th>
+            <th>Duration</th>
+            <th>People</th>
+            <th>Price</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {courses.map((course) => (
-            <tr key={course.course_id} style={{ borderBottom: "1px solid #eee" }}>
-              <td style={{ padding: "1rem" }}>
+            <tr key={course.course_id}>
+              <td>
                 <input
                   type="radio"
                   name="courseSelection"
@@ -109,33 +109,24 @@ const PriceList: React.FC = () => {
                     courseId: course.course_id,
                     peopleCount: 1
                   }))}
-                  style={{ 
-                    width: "20px", 
-                    height: "20px",
-                    cursor: "pointer"
-                  }}
+                  className="radio-large"
                 />
               </td>
-              <td style={{ padding: "1rem" }}>
+              <td>
                 <img
                   src={course.image.startsWith("/") ? course.image : `/img/${course.image}`}
                   alt={course.title}
-                  style={{ width: "80px", height: "60px", objectFit: "cover", borderRadius: "4px" }}
+                  className="course-image-thumb"
                 />
               </td>
-              <td style={{ padding: "1rem" }}>{course.title}</td>
-              <td style={{ padding: "1rem" }}>{course.duration} month{course.duration > 1 ? "s" : ""}</td>
-              <td style={{ padding: "1rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <td>{course.title}</td>
+              <td>{course.duration} month{course.duration > 1 ? "s" : ""}</td>
+              <td>
+                <div className="people-counter">
                   <button
                     onClick={() => handlePeopleCountChange(course.course_id, -1)}
                     disabled={selection.courseId !== course.course_id}
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "4px",
-                      border: "1px solid #ccc",
-                      cursor: selection.courseId === course.course_id ? "pointer" : "not-allowed",
-                    }}
+                    className="btn-counter"
                   >
                     -
                   </button>
@@ -143,46 +134,27 @@ const PriceList: React.FC = () => {
                     type="number"
                     value={selection.courseId === course.course_id ? selection.peopleCount : 1}
                     readOnly
-                    style={{
-                      width: "40px",
-                      padding: "0.25rem",
-                      textAlign: "center",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                    }}
+                    className="people-input"
                   />
                   <button
                     onClick={() => handlePeopleCountChange(course.course_id, 1)}
                     disabled={selection.courseId !== course.course_id}
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "4px",
-                      border: "1px solid #ccc",
-                      cursor: selection.courseId === course.course_id ? "pointer" : "not-allowed",
-                    }}
+                    className="btn-counter"
                   >
                     +
                   </button>
                 </div>
               </td>
-              <td style={{ padding: "1rem", textAlign: "right" }}>
+              <td>
                 {selection.courseId === course.course_id 
-                    ? (course.price * selection.peopleCount).toLocaleString()
-                    : course.price.toLocaleString()}
+                    ? `${(course.price * selection.peopleCount).toLocaleString()}€`
+                    : `${course.price.toLocaleString()}€`}
               </td>
-              <td style={{ padding: "1rem", textAlign: "center" }}>
+              <td>
                 <button
                   onClick={handleAddToCart}
                   disabled={selection.courseId !== course.course_id}
-                  style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "4px",
-                    border: "none",
-                    backgroundColor: isInCart(course.course_id) ? "#ff9800" : "#6c96a4",
-                    color: "white",
-                    cursor: selection.courseId === course.course_id ? "pointer" : "not-allowed",
-                    opacity: selection.courseId === course.course_id ? 1 : 0.5,
-                  }}
+                  className={`btn-secondary ${isInCart(course.course_id) ? 'btn-warning' : ''}`}
                 >
                   {isInCart(course.course_id) ? "Update" : "Add to cart"}
                 </button>
@@ -192,56 +164,30 @@ const PriceList: React.FC = () => {
         </tbody>
       </table>
 
-      <div style={{ 
-        marginTop: "2rem",
-        padding: "1rem",
-        backgroundColor: "#f8f9fa",
-        borderRadius: "8px"
-      }}>
-        <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+      <div className="apartment-option">
+        <label className="apartment-label">
           <input
             type="checkbox"
             checked={selection.needsApartment}
             onChange={(e) => setSelection(prev => ({ ...prev, needsApartment: e.target.checked }))}
-            style={{ width: "20px", height: "20px", cursor: "pointer" }}
+            className="checkbox-large"
           />
-          <span>In case if you need an apartment for the period of the course - please select this option</span>
+          <span>In case if you need an apartment for the period of the course - please select this option (+500€)</span>
         </label>
       </div>
 
-      <div style={{
-        marginTop: "2rem",
-        padding: "2rem",
-        backgroundColor: "#fff",
-        borderRadius: "8px",
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-      }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2 style={{ margin: 0, fontSize: "1.5rem" }}>Total</h2>
-          <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-            {calculateTotal().toLocaleString()}
+      <div className="total-section">
+        <div className="total-row">
+          <h2 className="total-title">Total</h2>
+          <span className="total-amount">
+            {calculateTotal().toLocaleString()}€
           </span>
         </div>
 
         {addedToCart && (
-          <div style={{ 
-            marginTop: "1rem",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}>
-            <span style={{ color: "#4caf50" }}>The course added to cart</span>
-            <Link
-              to="/cart"
-              style={{
-                padding: "0.75rem 1.5rem",
-                backgroundColor: "#6c96a4",
-                color: "white",
-                textDecoration: "none",
-                borderRadius: "4px",
-                fontWeight: "bold",
-              }}
-            >
+          <div className="added-to-cart-row">
+            <span className="success-message">The course added to cart</span>
+            <Link to="/cart" className="btn-primary">
               Go to Shopping Cart
             </Link>
           </div>

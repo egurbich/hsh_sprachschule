@@ -2,63 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCourses, CourseRecord } from '../utils/db';
 
-const gridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-  gap: '2rem',
-  padding: '2rem',
-};
-
-const cardStyle: React.CSSProperties = {
-  border: '1px solid #e2e8f0',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-  backgroundColor: '#fff',
-};
-
-const imageContainerStyle: React.CSSProperties = {
-  width: '100%',
-  height: '235px',
-  overflow: 'hidden',
-};
-
-const imageStyle: React.CSSProperties = {
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  transition: 'transform 0.3s ease-in-out',
-};
-
-const contentStyle: React.CSSProperties = {
-  padding: '1.5rem',
-};
-
-const titleStyle: React.CSSProperties = {
-  fontSize: '1.25rem',
-  fontWeight: 600,
-  color: '#33373a',
-  marginBottom: '0.5rem',
-};
-
-const descriptionStyle: React.CSSProperties = {
-  fontSize: '0.875rem',
-  color: '#666',
-  marginBottom: '1rem',
-  display: '-webkit-box',
-  WebkitLineClamp: 3,
-  WebkitBoxOrient: 'vertical',
-  overflow: 'hidden',
-};
-
-const linkStyle: React.CSSProperties = {
-  display: 'inline-block',
-  color: '#6c96a4',
-  textDecoration: 'none',
-  fontSize: '0.875rem',
-  fontWeight: 600,
-};
-
 export default function CourseList() {
     const [courses, setCourses] = useState<CourseRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -78,39 +21,33 @@ export default function CourseList() {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     if (error) {
-        return <div style={{ color: '#dc3545' }}>{error}</div>;
+        return <div className="error">{error}</div>;
     }
 
     return (
-        <div>
-            <h1 style={{ 
-                fontSize: '2rem', 
-                fontWeight: 600, 
-                color: '#33373a',
-                marginBottom: '2rem',
-                padding: '0 2rem'
-            }}>
+        <div className="container">
+            <h1 className="heading-primary">
                 Available Courses
             </h1>
-            <div style={gridStyle}>
+            <div className="course-list-grid">
                 {courses.map(course => (
-                    <article key={course.course_id} style={cardStyle}>
-                        <Link to={`/course/${course.course_id}`} style={{ textDecoration: 'none' }}>
-                            <div style={imageContainerStyle}>
+                    <article key={course.course_id} className="course-card">
+                        <Link to={`/course/${course.course_id}`} className="link-reset">
+                            <div className="course-card-image-container">
                                 <img
                                     src={course.image.startsWith("/") ? course.image : `/img/${course.image}`}
                                     alt={course.title}
-                                    style={imageStyle}
+                                    className="course-card-image"
                                 />
                             </div>
-                            <div style={contentStyle}>
-                                <h2 style={titleStyle}>{course.title}</h2>
-                                <p style={descriptionStyle}>{course.description}</p>
-                                <span style={linkStyle}>More Info →</span>
+                            <div className="course-card-content">
+                                <h2 className="course-card-title">{course.title}</h2>
+                                <p className="course-card-description">{course.description}</p>
+                                <span className="course-card-link">More Info →</span>
                             </div>
                         </Link>
                     </article>

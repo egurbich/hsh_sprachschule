@@ -44,62 +44,50 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: "40px auto", padding: "20px" }}>
-  <h2 style={{ marginBottom: 20, color: '#33373a' }}>Shopping cart</h2>
+    <div className="container-narrow">
+      <h2 className="heading-primary">Shopping cart</h2>
       {loading ? (
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       ) : items.length === 0 ? (
-        <div style={{
-          background: "#f8f9fa",
-          borderRadius: 8,
-          padding: 20,
-          textAlign: "center"
-        }}>
-          <p style={{ color: "#6c757d", marginBottom: 16 }}>The cart is empty at the moment</p>
-          <Link to="/prices" style={{ textDecoration: "none", color: "#0d6efd", fontWeight: 600 }}>Go to Pricelist</Link>
+        <div className="cart-empty">
+          <p>The cart is empty at the moment</p>
+          <Link to="/prices" className="link-primary">Go to Pricelist</Link>
         </div>
       ) : (
         <>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <table className="cart-table">
             <thead>
-              <tr style={{ borderBottom: "2px solid #eee" }}>
-                <th style={{ textAlign: "left", padding: 12 }}>Course</th>
-                <th style={{ textAlign: "left", padding: 12 }}>People</th>
-                <th style={{ textAlign: "left", padding: 12 }}>Apartment</th>
-                <th style={{ textAlign: "right", padding: 12 }}>Price</th>
-                <th style={{ textAlign: "right", padding: 12 }}>Total</th>
-                <th style={{ textAlign: "center", padding: 12 }}>Action</th>
+              <tr>
+                <th>Course</th>
+                <th>People</th>
+                <th>Apartment</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {items.map((it) => {
                 const course = courseById.get(it.course_id);
                 return (
-                  <tr key={it.cart_id} style={{ borderBottom: "1px solid #eee" }}>
-                    <td style={{ padding: 12 }}>
+                  <tr key={it.cart_id}>
+                    <td>
                       {course ? (
-                        <Link to={`/course/${course.course_id}`} style={{ textDecoration: "none", color: "#0d6efd" }}>
+                        <Link to={`/course/${course.course_id}`} className="link-primary">
                           {course.title}
                         </Link>
                       ) : (
                         <span>Course #{it.course_id}</span>
                       )}
                     </td>
-                    <td style={{ padding: 12 }}>{it.people_qty}</td>
-                    <td style={{ padding: 12 }}>{it.needs_appartment ? 'Yes' : 'No'}</td>
-                    <td style={{ padding: 12, textAlign: "right" }}>{it.price.toLocaleString()}</td>
-                    <td style={{ padding: 12, textAlign: "right" }}>{(it.total || 0).toLocaleString()}</td>
-                    <td style={{ padding: 12, textAlign: "center" }}>
+                    <td>{it.people_qty}</td>
+                    <td>{it.needs_appartment ? 'Yes' : 'No'}</td>
+                    <td>{it.price.toLocaleString()}€</td>
+                    <td>{(it.total || 0).toLocaleString()}€</td>
+                    <td>
                       <button
                         onClick={() => handleRemove(it.cart_id)}
-                        style={{
-                          padding: "6px 10px",
-                          borderRadius: 4,
-                          border: "1px solid #dc3545",
-                          background: "transparent",
-                          color: "#dc3545",
-                          cursor: "pointer"
-                        }}
+                        className="btn-remove"
                       >
                         Remove
                       </button>
@@ -110,24 +98,14 @@ const Cart: React.FC = () => {
             </tbody>
           </table>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16 }}>
-            <button
-              onClick={handleClear}
-              style={{
-                padding: "8px 14px",
-                borderRadius: 4,
-                border: "1px solid #6c757d",
-                background: "#6c757d",
-                color: "white",
-                cursor: "pointer"
-              }}
-            >
+          <div className="cart-actions">
+            <button onClick={handleClear} className="btn-clear">
               Clear cart
             </button>
 
-            <div style={{ fontSize: 18 }}>
-              <span style={{ marginRight: 8, color: "#6c757d" }}>Grand total:</span>
-              <strong>{grandTotal.toLocaleString()}</strong>
+            <div className="grand-total">
+              <span className="grand-total-label">Grand total:</span>
+              <strong>{grandTotal.toLocaleString()}€</strong>
             </div>
           </div>
         </>

@@ -7,7 +7,9 @@ import PriceList from "./components/PriceList";
 import Home from "./pages/Home";
 import Cart from "./components/Cart";
 import CourseDetail from "./pages/CourseDetail";
+import AddCourse from "./pages/AddCourse";
 import { seedDefaultCoursesIfEmpty } from "./utils/db";
+import "./App.css";
 
 function App() {
   useEffect(() => {
@@ -29,6 +31,7 @@ function App() {
           <Route path="/course/:courseId" element={<CourseDetail />} />
           <Route path="/prices" element={<PriceList />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/add-course" element={<AddCourse />} />
         </Routes>
       </div>
       <Footer />
