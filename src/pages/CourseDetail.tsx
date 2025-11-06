@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getAllCourses, CourseRecord } from '../utils/db';
 
+/*
+  File: pages/CourseDetail.tsx
+  Purpose: Display details of a single course.
+  How: Reads courseId from URL params, fetches courses from IndexedDB,
+       finds the matching course, and renders its content with navigation.
+  Props: none (courseId comes from route params)
+  Hooks: useParams, useState, useEffect
+  External: react-router-dom (useParams, Link); utils/db getAllCourses
+*/
+
 const CourseDetail: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const [course, setCourse] = useState<CourseRecord | null>(null);

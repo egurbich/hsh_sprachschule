@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCoursesEnsured, addCartItem, getCartItems, CourseRecord, CartRecord } from '../utils/db';
 
+/*
+  File: pages/PriceList.tsx
+  Purpose: Pricing/selection page to choose a course, people count, and optional apartment; add/update cart.
+  How: Loads courses and cart in parallel (Promise.all), manages selection in local state,
+       computes totals, persists to IndexedDB via addCartItem, and dispatches 'cart:updated'.
+  Props: none
+  Hooks: useState, useEffect
+  External: react-router-dom Link; utils/db (getAllCoursesEnsured, addCartItem, getCartItems)
+*/
+
 interface CourseSelection {
   courseId: number;
   peopleCount: number;

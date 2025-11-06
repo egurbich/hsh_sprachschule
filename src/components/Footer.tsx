@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/*
+  File: components/Footer.tsx
+  Purpose: Simple site footer with navigation and social links.
+  How: Renders static links grouped into columns; uses react-router links for internal nav.
+  Props: none
+  Hooks: none
+  External: react-router-dom Link
+*/
+
 export default function Footer() {
   return (
     <footer className="footer-custom">

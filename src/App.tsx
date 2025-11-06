@@ -11,6 +11,16 @@ import AddCourse from "./pages/AddCourse";
 import { seedDefaultCoursesIfEmpty } from "./utils/db";
 import "./App.css";
 
+/*
+  File: App.tsx
+  Purpose: Top-level application shell and routing.
+  How: Initializes default data (IndexedDB seeding) on mount, renders Navbar/Footer,
+       and defines client-side routes for all pages using React Router.
+  Props: none
+  Hooks: useEffect
+  External: react-router-dom (BrowserRouter, Routes, Route)
+*/
+
 function App() {
   useEffect(() => {
     // Ensure defaults exist (no-op if already seeded)

@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCourses, CourseRecord } from '../utils/db';
 
+/*
+    File: pages/CourseList.tsx
+    Purpose: List all available courses in a responsive grid.
+    How: Fetches courses from IndexedDB and renders cards linking to CourseDetail.
+    Props: none
+    Hooks: useState, useEffect
+    External: react-router-dom Link; utils/db getAllCourses
+*/
+
 export default function CourseList() {
     const [courses, setCourses] = useState<CourseRecord[]>([]);
     const [loading, setLoading] = useState(true);

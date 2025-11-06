@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllCourses, CourseRecord } from "../utils/db";
 
+/*
+  File: pages/Home.tsx
+  Purpose: Homepage with hero image and a curated list of popular courses.
+  How: Loads all courses from IndexedDB, filters/orders a fixed set (1,5,7),
+       and renders summary cards with links to details and pricelist.
+  Props: none
+  Hooks: useState, useEffect
+  External: react-router-dom Link; utils/db getAllCourses
+*/
+
 const Home: React.FC = () => {
   const [popular, setPopular] = useState<CourseRecord[]>([]);
 

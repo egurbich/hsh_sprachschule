@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addCourse, CourseRecord } from '../utils/db';
 
+/*
+  File: pages/AddCourse.tsx
+  Purpose: Admin-like form to create a new course in IndexedDB.
+  How: Controlled form with validation; on submit builds a CourseRecord with
+       a timestamp id, saves via addCourse, and navigates to the courses page.
+  Props: none
+  Hooks: useState, useNavigate
+  External: utils/db addCourse
+*/
+
 const AddCourse: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

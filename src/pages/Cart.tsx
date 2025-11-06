@@ -2,7 +2,21 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCartItems, removeCartItem, clearCart, getAllCourses, CartRecord, CourseRecord } from "../utils/db";
 
-const Cart: React.FC = () => {
+/*
+  File: pages/Cart.tsx
+  Purpose: Shopping cart page showing items, prices, and actions.
+  How: Loads cart items and course metadata, maps by id for names/links,
+       supports removing items and clearing the cart, and computes grand total.
+  Props: { cartId?: number } - optional prop to filter and show a single cart item by id
+  Hooks: useState, useEffect, useMemo
+  External: react-router-dom Link; utils/db (getCartItems, removeCartItem, clearCart, getAllCourses)
+*/
+
+export interface CartPageProps {
+  cartId?: number;
+}
+
+const Cart: React.FC<CartPageProps> = ({ cartId }) => {
   const [items, setItems] = useState<CartRecord[]>([]);
   const [courses, setCourses] = useState<CourseRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,7 +44,12 @@ const Cart: React.FC = () => {
     return map;
   }, [courses]);
 
-  const grandTotal = useMemo(() => items.reduce((sum, it) => sum + (it.total || 0), 0), [items]);
+  const displayedItems = useMemo(
+    () => (typeof cartId === 'number' ? items.filter(it => it.cart_id === cartId) : items),
+    [items, cartId]
+  );
+
+  const grandTotal = useMemo(() => displayedItems.reduce((sum, it) => sum + (it.total || 0), 0), [displayedItems]);
 
   const handleRemove = async (cart_id?: number) => {
     if (typeof cart_id !== 'number') return;
@@ -48,7 +67,7 @@ const Cart: React.FC = () => {
       <h2 className="heading-primary">Shopping cart</h2>
       {loading ? (
         <p className="loading">Loading...</p>
-      ) : items.length === 0 ? (
+      ) : displayedItems.length === 0 ? (
         <div className="cart-empty">
           <p>The cart is empty at the moment</p>
           <Link to="/prices" className="link-primary">Go to Pricelist</Link>
@@ -67,7 +86,7 @@ const Cart: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {items.map((it) => {
+              {displayedItems.map((it) => {
                 const course = courseById.get(it.course_id);
                 return (
                   <tr key={it.cart_id}>
@@ -99,9 +118,11 @@ const Cart: React.FC = () => {
           </table>
 
           <div className="cart-actions">
-            <button onClick={handleClear} className="btn-clear">
-              Clear cart
-            </button>
+            {typeof cartId !== 'number' && (
+              <button onClick={handleClear} className="btn-clear">
+                Clear cart
+              </button>
+            )}
 
             <div className="grand-total">
               <span className="grand-total-label">Grand total:</span>

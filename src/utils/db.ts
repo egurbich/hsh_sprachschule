@@ -1,6 +1,16 @@
 // Minimal IndexedDB helper (TypeScript)
 // Provides: openDB, addCourse, getAllCourses, seedDefaultCoursesIfEmpty, addCartItem, getCartItems
 
+/*
+  File: utils/db.ts
+  Purpose: IndexedDB abstraction for courses and shopping cart.
+  How: Opens/updates database schema; exposes Promise-based helpers to perform
+    CRUD operations on 'courses' and 'shopping_cart' object stores.
+  Exports: types (CourseRecord, CartRecord) and functions (openDB, addCourse, getAllCourses,
+     getAllCoursesEnsured, clearCourses, addCartItem, getCartItems, removeCartItem, clearCart,
+     seedDefaultCoursesIfEmpty)
+*/
+
 export type CourseRecord = {
   course_id: number;
   title: string;

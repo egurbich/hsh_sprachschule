@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCartItems } from '../utils/db';
 
+/*
+    File: components/Navbar.tsx
+    Purpose: Site navigation bar with links and a shopping cart badge.
+    How: Loads cart items count from IndexedDB, listens to 'cart:updated' events
+             to keep the badge in sync, and positions the cart icon at the top-right.
+    Props: none
+    Hooks: useState, useEffect
+    External: react-router-dom Link; utils/db getCartItems
+*/
+
 export default function Navbar() {
     const [cartCount, setCartCount] = useState<number>(0);
 
