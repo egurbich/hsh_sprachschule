@@ -14,7 +14,12 @@ const AddCourse: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -87,7 +92,7 @@ const AddCourse: React.FC = () => {
             id="title"
             name="title"
             value={formData.title}
-            onChange={handleChange}
+            onChange={handleInputChange}
             className="form-input"
             placeholder="e.g., A1.1, B2.2, C1.1"
             required
@@ -102,7 +107,7 @@ const AddCourse: React.FC = () => {
             id="description"
             name="description"
             value={formData.description}
-            onChange={handleChange}
+            onChange={handleTextAreaChange}
             className="form-textarea"
             rows={6}
             placeholder="Enter course description..."
@@ -120,7 +125,7 @@ const AddCourse: React.FC = () => {
               id="price"
               name="price"
               value={formData.price}
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="form-input"
               placeholder="1000"
               min="0"
@@ -138,7 +143,7 @@ const AddCourse: React.FC = () => {
               id="duration"
               name="duration"
               value={formData.duration}
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="form-input"
               placeholder="1"
               min="1"
@@ -157,7 +162,7 @@ const AddCourse: React.FC = () => {
             id="image"
             name="image"
             value={formData.image}
-            onChange={handleChange}
+            onChange={handleInputChange}
             className="form-input"
             placeholder="deutschkurs.jpg"
           />
